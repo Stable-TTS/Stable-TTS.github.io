@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="ZET-Speech: Zero-shot adaptive Emotion-controllable Text-to-Speech Synthesis with Diffusion and Style-based Models">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stable-TTS</title>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https:/www.googletagmanager.com/gtag/js?id=G-L7749G0HJZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-L7749G0HJZ');
+</script>
+
+  <link href="https:/fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https:/cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https:/ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body" style="padding-bottom: 24px;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-2 publication-title">Stable-TTS</h1>
+          <h4 class="title is-3 publication-title">Stable Speaker-Adaptive Text-to-Speech Synthesis<br>via Prosody Prompting under Limited Target Samples</h4>
+          <h4 class="title is-3 publication-title"><br>[Demo Pages]<br><br></h4>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <div class="content"></div>
+          <h3 class="title is-3">Main Experiments (Fine-tuning)</h3>
+          <p>
+            <h2 class="title is-5"><p><b>All results were fine-tuned with target samples.</b></p></h2>
+          </p>
+          <h3 class="title is-4">─ VCTK Samples ─</h3>
+          <div class="content">
+          </div>
+        </div>
+      </div>
+      <div class="columns is-centered has-text-centered  is-full-width">
+        <table class="table" style="background-color: transparent;">
+          <thead>
+            <tr>
+              <th align="center"><strong>Speaker</strong></th>
+              <th align="center"><strong>Text</strong></th>
+              <th align="center"><strong>Reference</strong></th>
+              <th align="center"><strong>Ground Truth</strong></th>
+              <th align="center"><strong>Stable-TTS (Ours) : w/ Prior Prompt</strong></th>
+              <th align="center"><strong>Stable-TTS (Ours) : w/ Self Prompt</strong></th>
+              <th align="center"><strong>Stable-TTS w/o PLM</strong></th>
+              <th align="center"><strong>UnitSpeech</strong></th>
+              <th align="center"><strong>Grad-StyleSpeech</strong></th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr>
+              <td width="28%" style="text-align: center;"><p><b>p227</b></p></td>
+              <td width="28%" style="text-align: center;"><p>It would create a Scottish secretary with a lot of weight.</p></td>
+              <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VCTK/p227_006/ref.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VCTK/p227_006/GT.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VCTK/p227_006/ST_w_prior.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VCTK/p227_006/ST_w_self.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VCTK/p227_006/ST_wo_plm.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VCTK/p227_006/US.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VCTK/p227_006/GSS.wav" type="audio/wav"></audio></td>
+              </tr>
+              <tr>
+                <td width="28%" style="text-align: center;"><p><b>p236</b></p></td>
+                <td width="28%" style="text-align: center;"><p>Halifax has also been mentioned as a likely predator.</p></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VCTK/p236_007/ref.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VCTK/p236_007/GT.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VCTK/p236_007/ST_w_prior.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VCTK/p236_007/ST_w_self.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VCTK/p236_007/ST_wo_plm.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VCTK/p236_007/US.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VCTK/p236_007/GSS.wav" type="audio/wav"></audio></td>
+              </tr>
+              <tr>
+                <td width="28%" style="text-align: center;"><p><b>p261</b></p></td>
+                <td width="28%" style="text-align: center;"><p>The Greeks used to imagine that it was a sign from the gods to foretell war or heavy rain.</p></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VCTK/p261_009/ref.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VCTK/p261_009/GT.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VCTK/p261_009/ST_w_prior.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VCTK/p261_009/ST_w_self.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VCTK/p261_009/ST_wo_plm.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VCTK/p261_009/US.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VCTK/p261_009/GSS.wav" type="audio/wav"></audio></td>
+              </tr>
+              <tr>
+                <td width="28%" style="text-align: center;"><p><b>p264</b></p></td>
+                <td width="28%" style="text-align: center;"><p>Therefore, this type of aircraft is completely safe.</p></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VCTK/p264_010/ref.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VCTK/p264_010/GT.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VCTK/p264_010/ST_w_prior.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VCTK/p264_010/ST_w_self.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VCTK/p264_010/ST_wo_plm.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VCTK/p264_010/US.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VCTK/p264_010/GSS.wav" type="audio/wav"></audio></td>
+              </tr>
+
+          </tbody>
+        </table>
+      </div>
+      <div class="content">
+      </div>
+    </div>
+  </div>
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <div class="content"></div>
+          <h3 class="title is-4">─ LibriTTS Samples ─</h3>
+        </div>
+      </div>
+      <div class="columns is-centered has-text-centered  is-full-width">
+        <table class="table" style="background-color: transparent;">
+          <thead>
+            <tr>
+              <th align="center"><strong>Speaker</strong></th>
+              <th align="center"><strong>Text</strong></th>
+              <th align="center"><strong>Reference</strong></th>
+              <th align="center"><strong>Ground Truth</strong></th>
+              <th align="center"><strong>Stable-TTS (Ours) : w/ Prior Prompt</strong></th>
+              <th align="center"><strong>Stable-TTS (Ours) : w/ Self Prompt</strong></th>
+              <th align="center"><strong>Stable-TTS w/o PLM</strong></th>
+              <th align="center"><strong>UnitSpeech</strong></th>
+              <th align="center"><strong>Grad-StyleSpeech</strong></th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr>
+              <td width="28%" style="text-align: center;"><p><b>237</b></p></td>
+              <td width="28%" style="text-align: center;"><p>It gives itself ungrudgingly to the moods of the season, holding nothing back.</p></td>
+              <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/Libri/237_002/ref.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/Libri/237_002/GT.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/Libri/237_002/ST_w_prior.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/Libri/237_002/ST_w_self.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/Libri/237_002/ST_wo_plm.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/Libri/237_002/US.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/Libri/237_002/GSS.wav" type="audio/wav"></audio></td>
+              </tr>
+              <tr>
+                <td width="28%" style="text-align: center;"><p><b>1089</b></p></td>
+                <td width="28%" style="text-align: center;"><p>He recognized their speech collectively before he distinguished their faces.</p></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/Libri/1089_003/ref.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/Libri/1089_003/GT.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/Libri/1089_003/ST_w_prior.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/Libri/1089_003/ST_w_self.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/Libri/1089_003/ST_wo_plm.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/Libri/1089_003/US.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/Libri/1089_003/GSS.wav" type="audio/wav"></audio></td>
+              </tr>
+              <tr>
+                <td width="28%" style="text-align: center;"><p><b>5105</b></p></td>
+                <td width="28%" style="text-align: center;"><p>Her sea going qualities were excellent, and would have amply sufficed for a circumnavigation of the globe.</p></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/Libri/5105_005/ref.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/Libri/5105_005/GT.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/Libri/5105_005/ST_w_prior.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/Libri/5105_005/ST_w_self.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/Libri/5105_005/ST_wo_plm.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/Libri/5105_005/US.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/Libri/5105_005/GSS.wav" type="audio/wav"></audio></td>
+              </tr>
+              
+          </tbody>
+        </table>
+      </div>
+      <div class="content">
+      </div>
+    </div>
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column">
+            <div class="content"></div>
+            <h3 class="title is-4">─ VoxCeleb Samples ─</h3>
+          </div>
+        </div>
+        <div class="columns is-centered has-text-centered  is-full-width">
+          <table class="table" style="background-color: transparent;">
+            <thead>
+              <tr>
+                <th align="center"><strong>Speaker</strong></th>
+                <th align="center"><strong>Text</strong></th>
+                <th align="center"><strong>Reference</strong></th>
+                <th align="center"><strong>Stable-TTS (Ours) : w/ Prior Prompt</strong></th>
+                <th align="center"><strong>Stable-TTS (Ours) : w/ Self Prompt</strong></th>
+                <th align="center"><strong>Stable-TTS w/o PLM</strong></th>
+                <th align="center"><strong>UnitSpeech</strong></th>
+                <th align="center"><strong>Grad-StyleSpeech</strong></th>
+              </tr>
+            </thead>
+            <tbody>
+  
+              <tr>
+                <td width="28%" style="text-align: center;"><p><b>0hQYDwSjLyU</b></p></td>
+                <td width="50%" style="text-align: center;"><p>These take the shape of a long round arch, with its path high above, and its two ends apparently beyond the horizon.</p></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VoxCeleb/0hQYDwSjLyU_014/ref.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VoxCeleb/0hQYDwSjLyU_014/ST_w_prior.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VoxCeleb/0hQYDwSjLyU_014/ST_w_self.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VoxCeleb/0hQYDwSjLyU_014/ST_wo_plm.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VoxCeleb/0hQYDwSjLyU_014/US.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VoxCeleb/0hQYDwSjLyU_014/GSS.wav" type="audio/wav"></audio></td>
+                </tr>
+                <tr>
+                  <td width="28%" style="text-align: center;"><p><b>_E-vRMuA-ak</b></p></td>
+                  <td width="28%" style="text-align: center;"><p>However, he held out little hope that the Government would take action.</p></td>
+                  <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VoxCeleb/_E-vRMuA-ak_013/ref.wav" type="audio/wav"></audio></td>
+                  <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VoxCeleb/_E-vRMuA-ak_013/ST_w_prior.wav" type="audio/wav"></audio></td>
+                  <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VoxCeleb/_E-vRMuA-ak_013/ST_w_self.wav" type="audio/wav"></audio></td>
+                  <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VoxCeleb/_E-vRMuA-ak_013/ST_wo_plm.wav" type="audio/wav"></audio></td>
+                  <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VoxCeleb/_E-vRMuA-ak_013/US.wav" type="audio/wav"></audio></td>
+                  <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VoxCeleb/_E-vRMuA-ak_013/GSS.wav" type="audio/wav"></audio></td>
+                </tr>
+                <tr>
+                  <td width="28%" style="text-align: center;"><p><b>_7RA36uU4WM</b></p></td>
+                  <td width="28%" style="text-align: center;"><p>It won't be much, but I'm grateful to find a friend. I'm guilty, you know, and there's no one to blame but myself.</p></td>
+                  <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VoxCeleb/_7RA36uU4WM_015/ref.wav" type="audio/wav"></audio></td>
+                  <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VoxCeleb/_7RA36uU4WM_015/ST_w_prior.wav" type="audio/wav"></audio></td>
+                  <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VoxCeleb/_7RA36uU4WM_015/ST_w_self.wav" type="audio/wav"></audio></td>
+                  <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VoxCeleb/_7RA36uU4WM_015/ST_wo_plm.wav" type="audio/wav"></audio></td>
+                  <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VoxCeleb/_7RA36uU4WM_015/US.wav" type="audio/wav"></audio></td>
+                  <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/VoxCeleb/_7RA36uU4WM_015/GSS.wav" type="audio/wav"></audio></td>
+                </tr>
+  
+            </tbody>
+          </table>
+        </div>
+        <div class="content">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- <section class="hero teaser">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <div class="content"></div>
+          <h3 class="title is-3"><br>Fine-tune vs. Zero-shot Experiments<br></h3>
+          <div class="content">
+          </div>
+        </div>
+      </div>
+      <div class="columns is-centered has-text-centered  is-full-width">
+        <table class="table" style="background-color: transparent;">
+          <thead>
+            <tr>
+              <th align="center"><strong>Speaker</strong></th>
+              <th align="center"><strong>Text</strong></th>
+              <th align="center"><strong>Reference</strong></th>
+              <th align="center"><strong>Stable-TTS (Fine-tune)</strong></th>
+              <th align="center"><strong>Stable-TTS (Zero-shot)</strong></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="28%" style="text-align: center;"><p><b>p227</b></p></td>
+              <td width="28%" style="text-align: center;"><p>Text~</p></td>
+              <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/main/001.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/main/001.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/main/001.wav" type="audio/wav"></audio></td>
+              </tr>
+              <tr>
+                <td width="28%" style="text-align: center;"><p><b>p235</b></p></td>
+                <td width="28%" style="text-align: center;"><p>Text~</p></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/wavs_unseen_eng/cfg/1284/ref.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/wavs_unseen_eng/cfg/260/ref.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/wavs_unseen_eng/cfg/237/ref.wav" type="audio/wav"></audio></td>
+              </tr>
+              <tr>
+                <td width="28%" style="text-align: center;"><p><b>p257</b></p></td>
+                <td width="28%" style="text-align: center;"><p>Text~</p></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/wavs_unseen_eng/cfg/1284/ref.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/wavs_unseen_eng/cfg/260/ref.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/wavs_unseen_eng/cfg/237/ref.wav" type="audio/wav"></audio></td>
+              </tr>
+              <tr>
+                <td width="28%" style="text-align: center;"><p><b>p257</b></p></td>
+                <td width="28%" style="text-align: center;"><p>Text~</p></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/wavs_unseen_eng/cfg/1284/ref.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/wavs_unseen_eng/cfg/260/ref.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/wavs_unseen_eng/cfg/237/ref.wav" type="audio/wav"></audio></td>
+              </tr>
+              <tr>
+                <td width="28%" style="text-align: center;"><p><b>p257</b></p></td>
+                <td width="28%" style="text-align: center;"><p>Text~</p></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/wavs_unseen_eng/cfg/1284/ref.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/wavs_unseen_eng/cfg/260/ref.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/wavs_unseen_eng/cfg/237/ref.wav" type="audio/wav"></audio></td>
+              </tr>
+
+          </tbody>
+        </table>
+      </div>
+      <div class="content">
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <div class="content"></div>
+          <h3 class="title is-3"><br>Timbre Input Type Ablation<br></h3>
+          <div class="content">
+          </div>
+        </div>
+      </div>
+      <div class="columns is-centered has-text-centered  is-full-width">
+        <table class="table" style="background-color: transparent;">
+          <thead>
+            <tr>
+              <th align="center"><strong>Speaker</strong></th>
+              <th align="center"><strong>Text</strong></th>
+              <th align="center"><strong>Reference</strong></th>
+              <th align="center"><strong>Ground Truth</strong></th>
+              <th align="center"><strong>Stable-TTS (Ours) : w/ Prior Prompt</strong></th>
+              <th align="center"><strong>Stable-TTS (Ours) : w/ Self Prompt</strong></th>
+              <th align="center"><strong>Stable-TTS w/o PLM</strong></th>
+              <th align="center"><strong>UnitSpeech</strong></th>
+              <th align="center"><strong>Grad-StyleSpeech</strong></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="28%" style="text-align: center;"><p><b>p227</b></p></td>
+              <td width="28%" style="text-align: center;"><p>Text~</p></td>
+              <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/main/001.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/main/001.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/main/001.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/main/001.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/main/001.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/main/001.wav" type="audio/wav"></audio></td>
+              <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/main/001.wav" type="audio/wav"></audio></td>
+              </tr>
+              <tr>
+                <td width="28%" style="text-align: center;"><p><b>p235</b></p></td>
+                <td width="28%" style="text-align: center;"><p>Text~</p></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/wavs_unseen_eng/cfg/1284/ref.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/wavs_unseen_eng/cfg/260/ref.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/wavs_unseen_eng/cfg/260/ref.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/wavs_unseen_eng/cfg/237/ref.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/wavs_unseen_eng/cfg/1089/ref.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/wavs_unseen_eng/cfg/237/ref.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/wavs_unseen_eng/cfg/1089/ref.wav" type="audio/wav"></audio></td>
+              </tr>
+              <tr>
+                <td width="28%" style="text-align: center;"><p><b>p257</b></p></td>
+                <td width="28%" style="text-align: center;"><p>Text~</p></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/wavs_unseen_eng/cfg/1284/ref.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/wavs_unseen_eng/cfg/260/ref.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/wavs_unseen_eng/cfg/237/ref.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/wavs_unseen_eng/cfg/1089/ref.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/wavs_unseen_eng/cfg/1089/ref.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/wavs_unseen_eng/cfg/237/ref.wav" type="audio/wav"></audio></td>
+                <td width="12%" style="text-align: center;"><audio controls=""><source src="static/wavs/main/wavs_unseen_eng/cfg/1089/ref.wav" type="audio/wav"></audio></td>
+              </tr>
+
+          </tbody>
+        </table>
+      </div>
+      <div class="content">
+      </div>
+    </div>
+  </div>
+</section>
+ -->
